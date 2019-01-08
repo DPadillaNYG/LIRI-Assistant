@@ -15,7 +15,7 @@ console.log("Searching for... " + userSearch + "\n");
 
 var spotify = new Spotify(keys.spotify);
 var omdbKey = keys.omdb.api_key;
-var dataFeed = "";
+var dataFeed;
 
 // Searching for Song Information
 function spotifyThis() {
@@ -23,13 +23,13 @@ function spotifyThis() {
     .search({ type: "track", query: userSearch, limit: 1 })
     .then(function(response) {
       var songArtist =
-        "Artist(s): " + response.tracks.items[0].album.artists[0].name;
+        "\nArtist(s): " + response.tracks.items[0].album.artists[0].name;
       var songName = "\nSong: " + '"' + response.tracks.items[0].name + '"';
       var songAlbum = "\nAlbum: " + response.tracks.items[0].album.name;
       var songPreview =
         "\nPreview: " + response.tracks.items[0].external_urls.spotify + "\n";
       dataFeed = songArtist + songName + songAlbum + songPreview;
-      console.log(dataFeed);
+      logFeed();
       console.log(songArtist, songName, songAlbum, songPreview);
     })
     .catch(function(err) {
@@ -42,7 +42,7 @@ function movieThis() {
   axios
     .get("http://www.omdbapi.com/?apikey=" + omdbKey + "&t=" + userSearch)
     .then(function(response) {
-      var movie = "Movie: " + response.data.Title;
+      var movie = "\nMovie: " + response.data.Title;
       var releaseDate = "\nReleased: " + response.data.Released;
       var rating = "\nIMDB Rating: " + response.data.Ratings[0].Value;
       var rottenTomatoes =
@@ -60,6 +60,7 @@ function movieThis() {
         actors +
         country +
         language;
+      logFeed();
       console.log(
         movie,
         releaseDate,
@@ -113,7 +114,6 @@ switch (userCatergory) {
       userSearch = "Sunflower";
     }
     spotifyThis();
-    logFeed();
     break;
   case "FIND-MOVIE-INFO-FOR":
     // Default Movie (Placeholder Info)
@@ -124,7 +124,6 @@ switch (userCatergory) {
     break;
   case "EXECUTE-TXT":
     executeThis();
-    logFeed();
     break;
   default:
     console.log(

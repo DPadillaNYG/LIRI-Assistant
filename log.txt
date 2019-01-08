@@ -1,0 +1,31 @@
+Search Data History
+
+Movie: Aquaman
+Released: 21 Dec 2018
+IMDB Rating: 7.9/10
+Rotten Tomatoes: 70%
+Plot:
+Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
+Actors: Jason Momoa, Amber Heard, Willem Dafoe, Patrick Wilson
+Country: Australia, USA
+Language: English
+
+Movie: Mary Poppins
+Released: 03 Dec 1964
+IMDB Rating: 7.8/10
+Rotten Tomatoes: 100%
+Plot:
+In turn of the century London, a magical nanny employs music and adventure to help two neglected children become closer to their father.
+Actors: Julie Andrews, Dick Van Dyke, David Tomlinson, Glynis Johns
+Country: USA
+Language: English
+
+Artist(s): Various Artists
+Song: "Sunflower - Spider-Man: Into the Spider-Verse"
+Album: Spider-Man: Into the Spider-Verse (Soundtrack From & Inspired by the Motion Picture)
+Preview: https://open.spotify.com/track/3KkXRkHbMCARz0aVfEt68P
+
+Artist(s): Childish Gambino
+Song: "Feels Like Summer"
+Album: Summer Pack
+Preview: https://open.spotify.com/track/7p4vHnYXkxlzvfePJVpcTr
