@@ -4,6 +4,7 @@ var keys = require("./keys");
 var fs = require("fs");
 var axios = require("axios");
 var Spotify = require("node-spotify-api");
+var moment = require("moment");
 
 // User Inputs
 var userInput = process.argv;
@@ -15,20 +16,26 @@ console.log("Searching for... " + userSearch + "\n");
 
 var spotify = new Spotify(keys.spotify);
 var omdbKey = keys.omdb.api_key;
+var bandsKey = keys.bandsintown.api_key;
+
+// Variables for Better Log Tracking
 var dataFeed;
+var searchedTerm;
 
 // Searching for Song Information
 function spotifyThis() {
   spotify
     .search({ type: "track", query: userSearch, limit: 1 })
     .then(function(response) {
+      searchedTerm =
+        "\nResults found for (" + userSearch + ") within Spotify\n";
       var songArtist =
         "\nArtist(s): " + response.tracks.items[0].album.artists[0].name;
       var songName = "\nSong: " + '"' + response.tracks.items[0].name + '"';
       var songAlbum = "\nAlbum: " + response.tracks.items[0].album.name;
       var songPreview =
         "\nPreview: " + response.tracks.items[0].external_urls.spotify + "\n";
-      dataFeed = songArtist + songName + songAlbum + songPreview;
+      dataFeed = searchedTerm + songArtist + songName + songAlbum + songPreview;
       logFeed();
       console.log(songArtist, songName, songAlbum, songPreview);
     })
@@ -42,6 +49,7 @@ function movieThis() {
   axios
     .get("http://www.omdbapi.com/?apikey=" + omdbKey + "&t=" + userSearch)
     .then(function(response) {
+      searchedTerm = "\nResults found for (" + userSearch + ") within OMDB\n";
       var movie = "\nMovie: " + response.data.Title;
       var releaseDate = "\nReleased: " + response.data.Released;
       var rating = "\nIMDB Rating: " + response.data.Ratings[0].Value;
@@ -52,6 +60,7 @@ function movieThis() {
       var country = "\nCountry: " + response.data.Country;
       var language = "\nLanguage: " + response.data.Language + "\n";
       dataFeed =
+        searchedTerm +
         movie +
         releaseDate +
         rating +
@@ -73,6 +82,36 @@ function movieThis() {
       );
     })
     .catch(function(err) {
+      console.log("Error Occured: " + err + "\n");
+    });
+}
+
+function concertThis() {
+  axios
+    .get(
+      "https://rest.bandsintown.com/artists/" +
+        userSearch +
+        "/events?app_id=" +
+        bandsKey
+    )
+    .then(function(response) {
+      searchedTerm =
+        "\nResults found for (" + userSearch + ") on Bandsintown\n";
+      var venue = "\nVenue: " + response.data[0].venue.name;
+      var location =
+        "\nLocation: " +
+        response.data[0].venue.city +
+        ", " +
+        response.data[0].venue.region +
+        ", " +
+        response.data[0].venue.country;
+      var date =
+        "\nDate: " + moment(response.data[0].datetime).format("L") + "\n";
+      dataFeed = searchedTerm + venue + location + date;
+      logFeed();
+      console.log(venue, location, date);
+    })
+    .catch(function(error) {
       console.log("Error Occured: " + err + "\n");
     });
 }
@@ -107,6 +146,11 @@ function logFeed() {
 
 switch (userCatergory) {
   case "FIND-LIVE-EVENTS-FOR":
+    // Default Band (Placeholder Info)
+    if (userSearch === "") {
+      userSearch = "Drake";
+    }
+    concertThis();
     break;
   case "FIND-SONG-INFO-FOR":
     // Default Song (Placeholder Info)
