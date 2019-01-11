@@ -13,7 +13,7 @@ I learned many things while doing this project with the support of my wife
 who is also a very talented programmer and Stack Overflow. Here are some things
 I learned and integrated into this project:
 
-- Node.js
+- node.js
 - fs (npm package) / reading and logging data to .txt files
 - dotenv (npm package) / for keeping API keys secret
 - axios (npm package) / for requesting and receiving API data
