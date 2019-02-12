@@ -1,7 +1,7 @@
-# LIRI-Assistant w/ Node.js (CLI App)
+# Liri Assistant (CLI App)
 
 LIRI is a Language Interpretation and Recognition Interface that takes in the user's
-parameters and retrieves data accordingly.
+parameters and retrieves data accordingly with the power of Node.js
 
 ### Link to Video for Complete Walkthrough
 
